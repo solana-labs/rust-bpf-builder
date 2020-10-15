@@ -1,11 +1,16 @@
 sudo: required
 language: c
-os: linux
 compiler: gcc
-services: docker
 
 notifications:
   email: false
 
-script:
-  - ./shellcheck.sh
+jobs:
+  include:
+    - stage: build
+      os: linux
+      services: docker
+      script: ./build.sh
+    - stage: build
+      os: osx
+      script: ./build.sh
